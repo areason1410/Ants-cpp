@@ -11,7 +11,7 @@ int main()
 	settings.antialiasingLevel = 8;
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "Ants", sf::Style::Default, settings);
     window.setFramerateLimit(60);
-    Colony colony(window, 100000);
+    Colony colony(window, 360);
     World gameWorld(window, colony);
     
     while (window.isOpen())
