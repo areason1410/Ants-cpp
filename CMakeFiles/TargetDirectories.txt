@@ -1,3 +1,0 @@
-/home/aaron/Documents/AntsAgain/CMakeFiles/rebuild_cache.dir
-/home/aaron/Documents/AntsAgain/CMakeFiles/edit_cache.dir
-/home/aaron/Documents/AntsAgain/CMakeFiles/antsagain.dir
