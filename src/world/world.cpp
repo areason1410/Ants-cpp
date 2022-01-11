@@ -3,7 +3,7 @@
 
 World::World(Grid grid):
 m_grid(grid),
-m_colony(1000)
+m_colony(150)
 {
 
 }

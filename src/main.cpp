@@ -10,6 +10,7 @@ int main()
     settings.antialiasingLevel = 8;
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "Ants", sf::Style::Default, settings);
     window.setFramerateLimit(60);
+    
 
     srand (time(NULL));
     Grid grid(window);

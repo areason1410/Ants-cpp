@@ -25,13 +25,29 @@ void Colony::update(Grid& grid, sf::RenderWindow& window)
         a.move(dt, window.getSize());
         window.draw(a.m_body);
 
-        Cell* t = grid.getCellAt(sf::Vector2f(a.m_body.getPosition().x, a.m_body.getPosition().y));
-        if(t->m_hasFood)
+        Cell* currentCell = grid.getCellAt(sf::Vector2f(a.m_body.getPosition().x, a.m_body.getPosition().y));
+        currentCell->makeTrail();
+        if(currentCell->m_hasFood)
         {
             a.carryingFood = true;
         }
-        t->makeTrail();
-    
+        else
+        {
+            if(a.carryingFood)
+            {
+                //currentCell->m_trailType = TrailType::Food;
+            } 
+            else
+            {
+                int bestOption = grid.sample(currentCell->m_index, 3);  
+
+                //std::cout << bestOption << "\n";
+                //int angle = angleAB(sf::Vector2f(grid.m_cells[bestOption].m_xPos, grid.m_cells[bestOption].m_yPos), a.m_body.getPosition());
+                //if(!a.onRotationCooldown) a.m_body.setRotation(-angle);
+            }
+        }
+        //std::cout << t->m_index << "\n";
+        
 
     }
 
