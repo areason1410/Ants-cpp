@@ -8,5 +8,5 @@ to run:
 ```
 cmake .
 make
-./re-ants
+./antsagain
 ```
