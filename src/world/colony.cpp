@@ -39,7 +39,7 @@ void Colony::update(Grid& grid, sf::RenderWindow& window)
             } 
             else
             {
-                int bestOption = grid.sample(currentCell->m_index, 3);  
+                int bestOption = grid.sample(currentCell->m_index, 0);  
 
                 //std::cout << bestOption << "\n";
                 //int angle = angleAB(sf::Vector2f(grid.m_cells[bestOption].m_xPos, grid.m_cells[bestOption].m_yPos), a.m_body.getPosition());

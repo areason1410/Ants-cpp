@@ -31,4 +31,5 @@ private:
     float m_sizeX, m_sizeY;
     int m_foodHP = 100;
     int m_maxTrailIntensity = 100;
+    bool m_shouldDraw = false;
 };

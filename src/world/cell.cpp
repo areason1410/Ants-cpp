@@ -38,15 +38,21 @@ void Cell::draw(sf::RenderWindow &window)
 
         if(m_trailIntensity > 0) m_trailIntensity -= 2;
         else m_isTrail = false;
+        if(!m_shouldDraw) m_shouldDraw = true;
 
     }
-    if(m_hasFood == true)
+    else if(m_hasFood == true)
     {
         rect.setFillColor(sf::Color(0, 255, 0, m_foodHP));
+        if(!m_shouldDraw) m_shouldDraw = true;
+    }
+    else
+    {
+        if(m_shouldDraw)m_shouldDraw = false;
     }
 
     
-    window.draw(rect);
+    if(m_shouldDraw) window.draw(rect);
 }
 
 void Cell::addFood()
