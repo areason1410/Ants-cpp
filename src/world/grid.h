@@ -5,14 +5,8 @@
 #include <math.h>
 #include "cell.h"
 #include "../util/util.h"
+#include <tuple>
 
-enum CellAroundType
-{
-    Above,
-    Below,
-    Left,
-    Right
-};
 
 class Grid
 {
@@ -20,9 +14,12 @@ public:
     Grid(sf::RenderWindow& window);
     Cell* getCellAt(sf::Vector2f pos);
     void drawCells();
-    Cell* cellAround(int index, CellAroundType type);
-    int sample(int index, int searchRadius);
+    Cell* cellAround(int index, DirectionType type);
+    Cell* sample(int index, int searchRadius, TrailType desiredType);
     std::vector<Cell> m_cells;
+    bool m_drawTrails;
+  
+
 private:
     sf::Vector2f cellSize;
     sf::RenderWindow& m_window;

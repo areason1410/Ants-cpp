@@ -10,6 +10,7 @@ public:
     World(Grid grid);
     void update(sf::RenderWindow& window);
     void addFoodAt(sf::Vector2f location);
+    void toggleTrails();
 
 private:
     Colony m_colony;

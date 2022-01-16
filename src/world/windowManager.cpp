@@ -39,7 +39,7 @@ void WindowManager::processEvents()
                 break;
             case sf::Event::KeyPressed:
                 if(event.key.code == sf::Keyboard::Escape) m_renderWindow.close();
-                if(event.key.code == sf::Keyboard::G);
+                if(event.key.code == sf::Keyboard::T) m_world.toggleTrails();
                 break;
             case sf::Event::MouseWheelMoved:
                 this->zoom(1 - event.mouseWheel.delta * 0.2f);

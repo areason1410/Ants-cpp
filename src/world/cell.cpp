@@ -22,9 +22,21 @@ sf::Vector2f Cell::Size() const
     return sf::Vector2f(m_sizeX, m_sizeY);
 }
 
-void Cell::draw(sf::RenderWindow &window)
-{
 
+sf::Vector2f Cell::Pos() const
+{
+    return sf::Vector2f(m_xPos, m_yPos);
+}
+
+void Cell::draw(sf::RenderWindow &window, bool shouldDrawTrail)
+{
+    if(m_trailIntensity > 0) { m_trailIntensity -= 2; }
+    else { m_isTrail = false; }
+
+    if(!m_hasFood && !shouldDrawTrail) { return; }
+
+
+    //very ugly i want to change but it works for now
     if(m_isTrail == true)
     {
         if(m_trailType == TrailType::Home)
@@ -35,24 +47,18 @@ void Cell::draw(sf::RenderWindow &window)
         {
             rect.setFillColor(sf::Color(0, 0, 255, m_trailIntensity));
         }
-
-        if(m_trailIntensity > 0) m_trailIntensity -= 2;
-        else m_isTrail = false;
-        if(!m_shouldDraw) m_shouldDraw = true;
+        m_shouldDraw = true;
 
     }
     else if(m_hasFood == true)
     {
         rect.setFillColor(sf::Color(0, 255, 0, m_foodHP));
-        if(!m_shouldDraw) m_shouldDraw = true;
+        m_shouldDraw = true;
     }
-    else
-    {
-        if(m_shouldDraw)m_shouldDraw = false;
-    }
+    else if(m_shouldDraw) { m_shouldDraw = false; }
 
-    
-    if(m_shouldDraw) window.draw(rect);
+    if(!m_shouldDraw) return;
+    window.draw(rect);
 }
 
 void Cell::addFood()
@@ -60,9 +66,16 @@ void Cell::addFood()
     m_hasFood = true;
 }
 
-void Cell::makeTrail()
+void Cell::makeHomeTrail()
 {
-    m_isTrail = true;
+    if(m_trailType == TrailType::Food) return;
+    if(!m_hasFood) m_isTrail = true;
+    m_trailIntensity = m_maxTrailIntensity;
+}
+
+void Cell::makeFoodTrail()
+{
+    if(!m_hasFood) m_isTrail = true;
     m_trailIntensity = m_maxTrailIntensity;
 }
 
@@ -70,8 +83,3 @@ void Cell::update()
 {
     
 }
-
-// bool Cell::hasFood() const
-// {
-//     return m_hasFood;
-// }

@@ -2,6 +2,7 @@
 #pragma once
 #include <math.h>
 #include <SFML/Graphics.hpp>
+#include "../world/cell.h"
 
 static float degToRad(float angle)
 {
@@ -15,6 +16,11 @@ static float radToDeg(float angle)
     float pi = 3.14159265359;
     return angle * (180 / pi);
 }
+template<typename T>
+static float getLength(sf::Vector2<T> v)
+{
+	return sqrt(v.x * v.x + v.y * v.y);
+}
 
 static float angleAB(sf::Vector2f a, sf::Vector2f b)
 {
@@ -24,6 +30,11 @@ static float angleAB(sf::Vector2f a, sf::Vector2f b)
 
         float angle = 270 - radToDeg(atan2(distY, distX));
         return -angle;
+
+        //float angle = 90+radToDeg(atan2(distY, distX));
+        //float angle = 90 + radToDeg(acos(distX / (getLength(a-b))));
+        //return angle;
+        //return distY > 0.0f ? angle : -angle;
 }
 
 template<typename T>
@@ -31,12 +42,13 @@ static int ranged_rand(T min, T max) {
     return min + (int)((double)(max - min) * (rand() / (RAND_MAX + 1.0)));
 }
 
-template<typename T>
-static float getLength(sf::Vector2<T> v)
-{
-	return sqrt(v.x * v.x + v.y * v.y);
-}
 
+
+static float getAngle(const sf::Vector2f & v)
+{
+	const float a = acos(v.x / getLength(v));
+	return v.y > 0.0f ? a : -a;
+}
 
 struct Wait
 {
@@ -60,3 +72,12 @@ struct Wait
     }
 
 };
+
+enum DirectionType
+{
+    Above,
+    Below,
+    Left,
+    Right
+};
+

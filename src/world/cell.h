@@ -15,9 +15,11 @@ public:
     Cell(float size_x, float size_y, int a, int b, int index);
     int m_xPos, m_yPos;
     void addFood();
-    void makeTrail();
+    void makeHomeTrail();
+    void makeFoodTrail();
     sf::Vector2f Size() const;
-    void draw(sf::RenderWindow &window);
+    sf::Vector2f Pos() const;
+    void draw(sf::RenderWindow &window, bool shouldDrawTrail);
     void update();
     //bool hasFood() const;
     
@@ -26,10 +28,11 @@ public:
     TrailType m_trailType;
     int m_index;
     int m_trailIntensity = m_maxTrailIntensity;
+    
 private:
     sf::RectangleShape rect;
     float m_sizeX, m_sizeY;
     int m_foodHP = 100;
-    int m_maxTrailIntensity = 100;
+    int m_maxTrailIntensity = 150;
     bool m_shouldDraw = false;
 };
